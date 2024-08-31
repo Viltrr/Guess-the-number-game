@@ -95,7 +95,7 @@ def niveau_3():
     nettoyer_ecran()
     essais = 10
     print("----------------------------------------Niveau 3----------------------------------------")
-    print(f"---------- Note : Au niveau 3, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 3, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 3000 :")
     
@@ -128,7 +128,7 @@ def niveau_4():
     nettoyer_ecran()
     essais = 8
     print("----------------------------------------Niveau 4----------------------------------------")
-    print(f"---------- Note : Au niveau 4, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 4, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 4000 :")
     
@@ -161,7 +161,7 @@ def niveau_5():
     nettoyer_ecran()
     essais = 6
     print("----------------------------------------Niveau 5----------------------------------------")
-    print(f"---------- Note : Au niveau 5, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 5, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 5000 :")
     
@@ -194,7 +194,7 @@ def niveau_6():
     nettoyer_ecran()
     essais = 5
     print("----------------------------------------Niveau 6----------------------------------------")
-    print(f"---------- Note : Au niveau 6, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 6, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 6000 :")
     
@@ -227,7 +227,7 @@ def niveau_7():
     nettoyer_ecran()
     essais = 4
     print("----------------------------------------Niveau 7----------------------------------------")
-    print(f"---------- Note : Au niveau 7, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 7, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 7000 :")
     
@@ -260,7 +260,7 @@ def niveau_8():
     nettoyer_ecran()
     essais = 3
     print("----------------------------------------Niveau 8----------------------------------------")
-    print(f"---------- Note : Au niveau 8, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 8, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 8000 :")
     
@@ -293,7 +293,7 @@ def niveau_9():
     nettoyer_ecran()
     essais = 2
     print("----------------------------------------Niveau 9----------------------------------------")
-    print(f"---------- Note : Au niveau 9, vous avez {essais} essais. ----------")
+    print("---------- Note : Au niveau 9, vous avez {essais} essais. ----------")
     print("----------------------------------------------------------------------------------------")
     print("Essayez de deviner le nombre mystère entre 1 et 9000 :")
     
