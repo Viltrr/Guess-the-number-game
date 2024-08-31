@@ -1,1 +1,324 @@
+import random
+import os
+
+niveau_actuel = 0
+
+def nettoyer_ecran():
+    """Nettoie l'écran du terminal."""
+    if os.name == 'nt':
+        # Windows
+        os.system('cls')
+    else:
+        # Systèmes basés sur Unix (Linux, macOS, etc.)
+        os.system('clear')
+
+def demander_niveau_suivant():
+    """Demande au joueur s'il veut passer au niveau suivant."""
+    while True:
+        reponse = input("Voulez-vous passer au niveau suivant ? (oui/non) : ").strip().lower()
+        if reponse in ["oui", "o"]:
+            return True
+        elif reponse in ["non", "n"]:
+            print("Merci d'avoir joué ! Au revoir.")
+            exit()
+        else:
+            print("Veuillez entrer 'oui' ou 'non'.")
+
+def choix_du_niveau():
+    global niveau_actuel
+    if niveau_actuel == 0:
+        print("Commençons par le Niveau 1!")
+        niveau_1()
+
+#---------------------------------------------------------------------------------------- NIVEAU 1 ----------------------------------------------------------------------------------------
+def niveau_1():
+    nettoyer_ecran()
+    print("----------------------------------------Niveau 1----------------------------------------")
+    print("---------- Note : Au niveau 1, vous avez un nombre illimité d'essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 1000 :")
+    
+    nombre_aleatoire = random.randint(1, 1000)
+    
+    while True:
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                break
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 1000.")
+    
+    if demander_niveau_suivant():
+        print("Passons au Niveau 2!")
+        niveau_2()
+
+#---------------------------------------------------------------------------------------- NIVEAU 2 ----------------------------------------------------------------------------------------
+def niveau_2():
+    nettoyer_ecran()
+    print("----------------------------------------Niveau 2----------------------------------------")
+    print("---------- Note : Au niveau 2, vous avez un nombre illimité d'essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 2000 :")
+    
+    nombre_aleatoire = random.randint(1, 2000)
+    
+    while True:
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                break
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 2000.")
+    
+    if demander_niveau_suivant():
+        print("Passons au Niveau 3!")
+        niveau_3()
+
+#---------------------------------------------------------------------------------------- NIVEAU 3 ----------------------------------------------------------------------------------------
+def niveau_3():
+    nettoyer_ecran()
+    essais = 10
+    print("----------------------------------------Niveau 3----------------------------------------")
+    print(f"---------- Note : Au niveau 3, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 3000 :")
+    
+    nombre_aleatoire = random.randint(1, 3000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                if demander_niveau_suivant():
+                    print("Passons au Niveau 4!")
+                    niveau_4()
+                return
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 3000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- NIVEAU 4 ----------------------------------------------------------------------------------------
+def niveau_4():
+    nettoyer_ecran()
+    essais = 8
+    print("----------------------------------------Niveau 4----------------------------------------")
+    print(f"---------- Note : Au niveau 4, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 4000 :")
+    
+    nombre_aleatoire = random.randint(1, 4000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                if demander_niveau_suivant():
+                    print("Passons au Niveau 5!")
+                    niveau_5()
+                return
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 4000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- NIVEAU 5 ----------------------------------------------------------------------------------------
+def niveau_5():
+    nettoyer_ecran()
+    essais = 6
+    print("----------------------------------------Niveau 5----------------------------------------")
+    print(f"---------- Note : Au niveau 5, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 5000 :")
+    
+    nombre_aleatoire = random.randint(1, 5000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                if demander_niveau_suivant():
+                    print("Passons au Niveau 6!")
+                    niveau_6()
+                return
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 5000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- NIVEAU 6 ----------------------------------------------------------------------------------------
+def niveau_6():
+    nettoyer_ecran()
+    essais = 5
+    print("----------------------------------------Niveau 6----------------------------------------")
+    print(f"---------- Note : Au niveau 6, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 6000 :")
+    
+    nombre_aleatoire = random.randint(1, 6000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                if demander_niveau_suivant():
+                    print("Passons au Niveau 7!")
+                    niveau_7()
+                return
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 6000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- NIVEAU 7 ----------------------------------------------------------------------------------------
+def niveau_7():
+    nettoyer_ecran()
+    essais = 4
+    print("----------------------------------------Niveau 7----------------------------------------")
+    print(f"---------- Note : Au niveau 7, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 7000 :")
+    
+    nombre_aleatoire = random.randint(1, 7000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                if demander_niveau_suivant():
+                    print("Passons au Niveau 8!")
+                    niveau_8()
+                return
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 7000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- NIVEAU 8 ----------------------------------------------------------------------------------------
+def niveau_8():
+    nettoyer_ecran()
+    essais = 3
+    print("----------------------------------------Niveau 8----------------------------------------")
+    print(f"---------- Note : Au niveau 8, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 8000 :")
+    
+    nombre_aleatoire = random.randint(1, 8000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                if demander_niveau_suivant():
+                    print("Passons au Niveau 9!")
+                    niveau_9()
+                return
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 8000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- NIVEAU 9 ----------------------------------------------------------------------------------------
+def niveau_9():
+    nettoyer_ecran()
+    essais = 2
+    print("----------------------------------------Niveau 9----------------------------------------")
+    print(f"---------- Note : Au niveau 9, vous avez {essais} essais. ----------")
+    print("----------------------------------------------------------------------------------------")
+    print("Essayez de deviner le nombre mystère entre 1 et 9000 :")
+    
+    nombre_aleatoire = random.randint(1, 9000)
+    
+    for _ in range(essais):
+        try:
+            nombre_joueur = int(input("Entrez un nombre : "))
+            
+            if nombre_joueur > nombre_aleatoire:
+                print("Le nombre mystère est plus petit.") 
+            elif nombre_joueur < nombre_aleatoire:
+                print("Le nombre mystère est plus grand.") 
+            else:
+                print("------------------------------------------")  
+                print("Bravo, vous avez trouvé le nombre mystère !")
+                print("------------------------------------------")
+                print("Vous avez complété tous les niveaux ! Merci d'avoir joué.")
+                exit()
+        except ValueError:
+            print("Veuillez entrer un nombre entier valide entre 1 et 9000.")
+    
+    print("Vous avez épuisé tous vos essais ! Game over.")
+    exit()
+
+#---------------------------------------------------------------------------------------- COMMENCER LE JEU ----------------------------------------------------------------------------------------
+choix_du_niveau()
 
