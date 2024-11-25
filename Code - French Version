@@ -19,7 +19,7 @@ def demander_niveau_suivant():
         if reponse in ["oui", "o"]:
             return True
         elif reponse in ["non", "n"]:
-            print("Merci d'avoir joué ! Au revoir.")
+            print("Merci d'avoir joué !")
             exit()
         else:
             print("Veuillez entrer 'oui' ou 'non'.")
