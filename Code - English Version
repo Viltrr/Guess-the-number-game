@@ -19,7 +19,7 @@ def ask_next_level():
         if response in ["yes", "y"]:
             return True
         elif response in ["no", "n"]:
-            print("Thanks for playing! Goodbye.")
+            print("Thanks for playing!")
             exit()
         else:
             print("Please enter 'yes' or 'no'.")
