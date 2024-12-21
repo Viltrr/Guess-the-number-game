@@ -3,153 +3,98 @@ import os
 import time
 import json
 
-# Variables globales
-niveau_actuel = 1
-scores = {}
-sauvegarde_fichier = "sauvegarde.json"
+# Global variables
+save_file = "save.json"
+current_level = 0
 
-def nettoyer_ecran():
-    """Nettoie l'écran du terminal."""
-    if os.name == 'nt':
-        os.system('cls')  # Windows
-    else:
-        os.system('clear')  # Unix/Linux/MacOS
+def save_progress(level):
+    with open(save_file, "w") as file:
+        json.dump({"level": level}, file)
 
-def charger_sauvegarde():
-    """Charge la progression et les scores depuis le fichier de sauvegarde."""
-    global niveau_actuel, scores
-    if os.path.exists(sauvegarde_fichier):
-        with open(sauvegarde_fichier, "r") as fichier:
-            data = json.load(fichier)
-            niveau_actuel = data.get("niveau_actuel", 1)
-            scores = data.get("scores", {})
-    else:
-        scores = {}
+def load_progress():
+    if os.path.exists(save_file):
+        with open(save_file, "r") as file:
+            try:
+                data = json.load(file)
+                return data.get("level", 0)
+            except json.JSONDecodeError:
+                return 0
+    return 0
 
-def sauvegarder_progression():
-    """Sauvegarde la progression et les scores."""
-    data = {
-        "niveau_actuel": niveau_actuel,
-        "scores": scores
-    }
-    with open(sauvegarde_fichier, "w") as fichier:
-        json.dump(data, fichier)
+def clear_screen():
+    os.system("cls" if os.name == "nt" else "clear")
 
-def demander_niveau():
-    """Permet de choisir un niveau parmi les niveaux débloqués."""
-    global niveau_actuel
-    print(f"Vous êtes au niveau {niveau_actuel}.")
-    print("Niveaux débloqués : ", ", ".join(str(i) for i in range(1, niveau_actuel + 1)))
+def display_loading(message, duration=2):
+    print(message, end="")
+    for _ in range(duration):
+        time.sleep(0.5)
+        print(".", end="", flush=True)
+    print()
+
+def ask_next_level():
     while True:
-        try:
-            choix = int(input("Choisissez un niveau ou entrez 0 pour continuer : "))
-            if choix == 0:
-                return
-            if 1 <= choix <= niveau_actuel:
-                lancer_niveau(choix)
-                return
-            print("Choix invalide. Réessayez.")
-        except ValueError:
-            print("Veuillez entrer un nombre valide.")
-
-def lancer_niveau(niveau):
-    """Lance un niveau spécifique."""
-    global niveau_actuel
-    if niveau == 1:
-        niveau_1()
-    elif niveau == 2:
-        niveau_2()
-    elif niveau == 3:
-        niveau_3()
-    elif niveau == 4:
-        niveau_4()
-    elif niveau == 5:
-        niveau_5()
-    elif niveau == 6:
-        niveau_6()
-    elif niveau == 7:
-        niveau_7()
-    elif niveau == 8:
-        niveau_8()
-    elif niveau == 9:
-        niveau_9()
-
-def jouer_niveau(niveau, essais, limite):
-    """Fonction générique pour jouer un niveau."""
-    global niveau_actuel, scores
-    nettoyer_ecran()
-    print(f"----------------------------------------Niveau {niveau}----------------------------------------")
-    print(f"Note : Vous avez {essais} essais pour deviner le nombre mystère entre 1 et {limite}.")
-    nombre_aleatoire = random.randint(1, limite)
-    tentatives = []
-    debut = time.time()
-
-    for essai in range(essais):
-        try:
-            nombre_joueur = int(input(f"Essai {essai + 1}/{essais} : "))
-            tentatives.append(nombre_joueur)
-            if nombre_joueur > nombre_aleatoire:
-                print("Le nombre mystère est plus petit.")
-            elif nombre_joueur < nombre_aleatoire:
-                print("Le nombre mystère est plus grand.")
-            else:
-                fin = time.time()
-                temps = round(fin - debut, 2)
-                print(f"Bravo ! Vous avez trouvé le nombre mystère ({nombre_aleatoire}) en {temps} secondes.")
-                scores[f"Niveau {niveau}"] = f"{temps} secondes"
-                niveau_actuel = max(niveau_actuel, niveau + 1)
-                sauvegarder_progression()
-                demander_niveau_suivant()
-                return
-        except ValueError:
-            print("Veuillez entrer un nombre entier valide.")
-    print(f"Dommage ! Le nombre mystère était {nombre_aleatoire}.")
-    print(f"Tentatives : {tentatives}")
-    exit()
-
-def demander_niveau_suivant():
-    """Demande au joueur s'il veut passer au niveau suivant."""
-    global niveau_actuel
-    while True:
-        reponse = input("Voulez-vous passer au niveau suivant ? (oui/non) : ").strip().lower()
-        if reponse in ["oui", "o"]:
-            lancer_niveau(niveau_actuel)
-            return
-        elif reponse in ["non", "n"]:
-            print("Merci d'avoir joué !")
+        response = input("Do you want to proceed to the next level? (yes/no): ").strip().lower()
+        if response in ["yes", "y"]:
+            return True
+        elif response in ["no", "n"]:
+            print("Thanks for playing!")
             exit()
         else:
-            print("Veuillez entrer 'oui' ou 'non'.")
+            print("Please enter 'yes' or 'no'.")
 
-# Fonctions pour chaque niveau
-def niveau_1():
-    jouer_niveau(1, essais=float('inf'), limite=1000)
+def play_level(level, max_number, attempts=None):
+    clear_screen()
+    print(f"---------- Level {level} ----------")
+    if attempts:
+        print(f"Note: You have {attempts} attempts.")
+    else:
+        print("Note: You have unlimited attempts.")
+    print(f"Guess the mystery number between 1 and {max_number}!")
 
-def niveau_2():
-    jouer_niveau(2, essais=float('inf'), limite=2000)
+    random_number = random.randint(1, max_number)
+    attempt_count = 0
 
-def niveau_3():
-    jouer_niveau(3, essais=10, limite=3000)
+    while attempts is None or attempt_count < attempts:
+        try:
+            player_guess = int(input(f"Enter your guess (Attempt {attempt_count + 1}): "))
+            attempt_count += 1
 
-def niveau_4():
-    jouer_niveau(4, essais=8, limite=4000)
+            if player_guess > random_number:
+                print("The mystery number is smaller.")
+            elif player_guess < random_number:
+                print("The mystery number is bigger.")
+            else:
+                print("Congratulations, you guessed the number!")
+                return True
+        except ValueError:
+            print("Please enter a valid number.")
+    
+    print("You used all your attempts. Game over!")
+    return False
 
-def niveau_5():
-    jouer_niveau(5, essais=6, limite=5000)
+def handle_level(level, max_number, attempts=None):
+    global current_level
+    if play_level(level, max_number, attempts):
+        current_level += 1
+        save_progress(current_level)
+        display_loading("Loading next level")
+    else:
+        print("Better luck next time!")
 
-def niveau_6():
-    jouer_niveau(6, essais=5, limite=6000)
+def main():
+    global current_level
+    current_level = load_progress()
 
-def niveau_7():
-    jouer_niveau(7, essais=4, limite=7000)
+    while True:
+        if current_level == 0:
+            handle_level(1, 10)
+        elif current_level == 1:
+            handle_level(2, 20)
+        elif current_level == 2:
+            handle_level(3, 50, 5)
+        else:
+            print("Congratulations, you've completed all levels!")
+            break
 
-def niveau_8():
-    jouer_niveau(8, essais=3, limite=8000)
-
-def niveau_9():
-    jouer_niveau(9, essais=2, limite=9000)
-
-# Lancement du jeu
-charger_sauvegarde()
-demander_niveau()
-lancer_niveau(niveau_actuel)
+if __name__ == "__main__":
+    main()
